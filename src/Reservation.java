@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 
@@ -277,7 +278,7 @@ public class Reservation extends JFrame {
 					Connection con = connect();
 					Class.forName("oracle.jdbc.driver.OracleDriver");
 					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
-					String query = "INSERT INTO RESERVATIONS VALUES(?,?,?,?,?,?,?,?,?,?)";
+					String query = "INSERT INTO RESERVATIONS VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setInt(1,pnr1);
 					ps.setString(2,flight);

@@ -3,6 +3,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -10,9 +12,14 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -32,10 +39,24 @@ public class Confirmed extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			}		
 		});
 	}
-
+	Connection connect()
+	{
+		try
+		{
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
+			return con;
+		}
+		catch(Exception e1)
+		{
+			e1.printStackTrace();
+			return null;
+		}
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -48,7 +69,7 @@ public class Confirmed extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{129, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 25, 0, 24, 0, 18, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 25, 0, 24, 0, 23, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
@@ -61,18 +82,18 @@ public class Confirmed extends JFrame {
 		gbc_lblSelectFlight.gridy = 0;
 		contentPane.add(lblSelectFlight, gbc_lblSelectFlight);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bangalore to Delhi BADL84", "Bangalore to Mumbai BAMB86", "Chennai to Kolkata CHKL88", "Bangalore to Jaipur BAJP90", "Kochi to Mumbai KOMB92", "Bangalore to Kashmir BAKS94", "Bangalore to Dubai BADB96", "Bangalore to New York BANY98", "Bangalore to London BALN82"}));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 0;
-		contentPane.add(comboBox, gbc_comboBox);
+		JComboBox cbflno = new JComboBox();
+		cbflno.setModel(new DefaultComboBoxModel(new String[] {"Bangalore to Delhi BADL84", "Bangalore to Mumbai BAMB86", "Chennai to Kolkata CHKL88", "Bangalore to Jaipur BAJP90", "Kochi to Mumbai KOMB92", "Bangalore to Kashmir BAKS94", "Bangalore to Dubai BADB96", "Bangalore to New York BANY98", "Bangalore to London BALN82"}));
+		GridBagConstraints gbc_cbflno = new GridBagConstraints();
+		gbc_cbflno.insets = new Insets(0, 0, 5, 5);
+		gbc_cbflno.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbflno.gridx = 1;
+		gbc_cbflno.gridy = 0;
+		contentPane.add(cbflno, gbc_cbflno);
 		
 		JLabel lblNewLabel = new JLabel("");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 1;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
@@ -85,18 +106,18 @@ public class Confirmed extends JFrame {
 		gbc_lblEnterTravelDate.gridy = 2;
 		contentPane.add(lblEnterTravelDate, gbc_lblEnterTravelDate);
 		
-		JTextField textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 2;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
+		JTextField tfdate = new JTextField();
+		GridBagConstraints gbc_tfdate = new GridBagConstraints();
+		gbc_tfdate.insets = new Insets(0, 0, 5, 5);
+		gbc_tfdate.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfdate.gridx = 1;
+		gbc_tfdate.gridy = 2;
+		contentPane.add(tfdate, gbc_tfdate);
+		tfdate.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 1;
 		gbc_lblNewLabel_1.gridy = 3;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
@@ -104,18 +125,20 @@ public class Confirmed extends JFrame {
 		JButton btnCheckStatus = new JButton("Check Status");
 		
 		GridBagConstraints gbc_btnCheckStatus = new GridBagConstraints();
-		gbc_btnCheckStatus.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCheckStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCheckStatus.gridwidth = 2;
 		gbc_btnCheckStatus.gridx = 0;
 		gbc_btnCheckStatus.gridy = 4;
 		contentPane.add(btnCheckStatus, gbc_btnCheckStatus);
 		
-		JLabel label = new JLabel("");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 0);
-		gbc_label.gridx = 1;
-		gbc_label.gridy = 5;
-		contentPane.add(label, gbc_label);
+		JLabel lbldata = new JLabel("No Data Returned");
+		lbldata.setVisible(false);
+		GridBagConstraints gbc_lbldata = new GridBagConstraints();
+		gbc_lbldata.gridwidth = 3;
+		gbc_lbldata.insets = new Insets(0, 0, 5, 5);
+		gbc_lbldata.gridx = 0;
+		gbc_lbldata.gridy = 5;
+		contentPane.add(lbldata, gbc_lbldata);
 		
 		JLabel lblRetrievingDetails = new JLabel("Retrieving Details....");
 		lblRetrievingDetails.setVisible(false);
@@ -128,6 +151,65 @@ public class Confirmed extends JFrame {
 		btnCheckStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblRetrievingDetails.setVisible(true);
+				String flight = cbflno.getSelectedItem().toString();
+				String date = tfdate.getText().toString();
+				int rows = 0;
+				
+				try
+				{
+					Connection con = connect();
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
+					String query = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE=?";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1,flight);
+					ps.setString(2,date);
+					ResultSet rs = ps.executeQuery();
+					boolean records = rs.next();
+					if (!records ) 
+					{
+						lbldata.setVisible(true);
+					}
+					
+					while(rs.next())
+					{
+						rows++;
+					}
+					
+					Object data1[][] = new Object[rows][11];
+					
+					Object[] Colheads={"PNR","FLIGHT NO","TRAVEL DATE","FIRST NAME","LAST NAME","AGE","GENDER","ADDRESS","PHONE NUMBER","CLASS","STATUS"};
+					String query1 = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE =?";
+					PreparedStatement ps1 = con.prepareStatement(query1);
+					ps1.setString(1,flight);
+					ps1.setString(2,date);
+					ResultSet rs1 = ps1.executeQuery();
+					rs1.next();
+					for(int i1=0;i1<rows;i1++)
+					{
+							rs1.next();
+							for(int j1=0;j1<11;j1++)
+							{
+								data1[i1][j1]=rs1.getString(j1+1);
+							}
+					}
+					JTable table=new JTable(data1,Colheads);
+					int v=ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+					int h=ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+					JScrollPane jsp=new JScrollPane(table,v,h);
+					Display disp = new Display();
+					disp.getContentPane().add(jsp);
+					disp.setVisible(true);
+					ps.close();
+					ps1.close();
+					rs.close();
+					rs1.close();
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 	}
