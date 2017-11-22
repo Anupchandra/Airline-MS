@@ -150,7 +150,7 @@ public class Confirmed extends JFrame {
 		
 		btnCheckStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				lblRetrievingDetails.setVisible(true);
 				String flight = cbflno.getSelectedItem().toString();
 				String date = tfdate.getText().toString();
 				int rows = 0;
@@ -160,34 +160,31 @@ public class Confirmed extends JFrame {
 					Connection con = connect();
 					Class.forName("oracle.jdbc.driver.OracleDriver");
 					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
-					String query = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE=? AND STATUS='C'";
+					String query = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE=?";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setString(1,flight);
 					ps.setString(2,date);
 					ResultSet rs = ps.executeQuery();
-					/* boolean records = rs.next();
+					boolean records = rs.next();
 					if (!records ) 
 					{
 						lbldata.setVisible(true);
-					} */
+					}
+					
 					while(rs.next())
 					{
 						rows++;
 					}
-					if(rows==0)
-					{
-						lbldata.setVisible(true);
-					}
-					else
-					{
+					
 					Object data1[][] = new Object[rows][11];
-					lblRetrievingDetails.setVisible(true);
+					
 					Object[] Colheads={"PNR","FLIGHT NO","TRAVEL DATE","FIRST NAME","LAST NAME","AGE","GENDER","ADDRESS","PHONE NUMBER","CLASS","STATUS"};
-					String query1 = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE =? AND STATUS = 'C'";
+					String query1 = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE =?";
 					PreparedStatement ps1 = con.prepareStatement(query1);
 					ps1.setString(1,flight);
 					ps1.setString(2,date);
-					ResultSet rs1 = ps1.executeQuery();	
+					ResultSet rs1 = ps1.executeQuery();
+					rs1.next();
 					for(int i1=0;i1<rows;i1++)
 					{
 							rs1.next();
@@ -203,12 +200,10 @@ public class Confirmed extends JFrame {
 					Display disp = new Display();
 					disp.getContentPane().add(jsp);
 					disp.setVisible(true);
-					
 					ps.close();
 					ps1.close();
 					rs.close();
 					rs1.close();
-					}
 				}
 				catch(Exception e1)
 				{
