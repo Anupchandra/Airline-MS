@@ -62,7 +62,7 @@ public class Confirmed extends JFrame {
 	 */
 	public Confirmed() {
 		setTitle("Confirmed Passengers");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 335, 218);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

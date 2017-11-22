@@ -56,7 +56,7 @@ public class Cancellation extends JFrame {
 	 */
 	public Cancellation() {
 		setTitle("Ticket Cancellation");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 359, 147);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -131,5 +131,4 @@ public class Cancellation extends JFrame {
 			}
 		});
 	}
-
 }

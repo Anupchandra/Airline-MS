@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,6 +37,10 @@ public class LoginPanel extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}
+			public void close()
+			{
+				
 			}
 		});
 	}
@@ -156,9 +161,12 @@ public class LoginPanel extends JFrame {
 					try
 					{
 						lblLoginSucessful.setVisible(true);
+						lblInvalidLoginCredentials.setVisible(false);
 						MainPanel main = new MainPanel();
 						main.setVisible(true);
-						
+						LoginPanel login = new LoginPanel();
+						login.setVisible(false);
+						login.dispose();
 					}
 					catch(Exception e4)
 					{
