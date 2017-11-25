@@ -20,6 +20,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Random;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Reservation extends JFrame {
 
@@ -70,6 +72,7 @@ public class Reservation extends JFrame {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 424, 388);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -80,6 +83,8 @@ public class Reservation extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblFlightNumber = new JLabel("Flight Number:");
+		lblFlightNumber.setForeground(Color.WHITE);
+		lblFlightNumber.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblFlightNumber = new GridBagConstraints();
 		gbc_lblFlightNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblFlightNumber.insets = new Insets(0, 0, 5, 5);
@@ -88,6 +93,9 @@ public class Reservation extends JFrame {
 		contentPane.add(lblFlightNumber, gbc_lblFlightNumber);
 		
 		JComboBox cbflight = new JComboBox();
+		cbflight.setBackground(new Color(0, 0, 102));
+		cbflight.setForeground(Color.WHITE);
+		cbflight.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		cbflight.setModel(new DefaultComboBoxModel(new String[] {"Bangalore to Delhi BADL84", "Bangalore to Mumbai BAMB86", "Chennai to Kolkata CHKL88", "Bangalore to Jaipur BAJP90", "Kochi to Mumbai KOMB92", "Bangalore to Kashmir BAKS94", "Bangalore to Dubai BADB96", "Bangalore to New York BANY98", "Bangalore to London BALN82"}));
 		GridBagConstraints gbc_cbflight = new GridBagConstraints();
 		gbc_cbflight.insets = new Insets(0, 0, 5, 5);
@@ -97,6 +105,8 @@ public class Reservation extends JFrame {
 		contentPane.add(cbflight, gbc_cbflight);
 		
 		JLabel lblTravelDate = new JLabel("Travel Date:");
+		lblTravelDate.setForeground(Color.WHITE);
+		lblTravelDate.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblTravelDate = new GridBagConstraints();
 		gbc_lblTravelDate.anchor = GridBagConstraints.EAST;
 		gbc_lblTravelDate.insets = new Insets(0, 0, 5, 5);
@@ -114,6 +124,8 @@ public class Reservation extends JFrame {
 		tfdate.setColumns(10);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setForeground(Color.WHITE);
+		lblFirstName.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
 		gbc_lblFirstName.anchor = GridBagConstraints.EAST;
 		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
@@ -131,6 +143,8 @@ public class Reservation extends JFrame {
 		tffname.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setForeground(Color.WHITE);
+		lblLastName.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblLastName = new GridBagConstraints();
 		gbc_lblLastName.anchor = GridBagConstraints.EAST;
 		gbc_lblLastName.insets = new Insets(0, 0, 5, 5);
@@ -148,6 +162,8 @@ public class Reservation extends JFrame {
 		tflname.setColumns(10);
 		
 		JLabel lblAge = new JLabel("Age:");
+		lblAge.setForeground(Color.WHITE);
+		lblAge.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblAge = new GridBagConstraints();
 		gbc_lblAge.anchor = GridBagConstraints.EAST;
 		gbc_lblAge.insets = new Insets(0, 0, 5, 5);
@@ -165,6 +181,8 @@ public class Reservation extends JFrame {
 		tfage.setColumns(10);
 		
 		JLabel lblGender = new JLabel("Gender:");
+		lblGender.setForeground(Color.WHITE);
+		lblGender.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblGender = new GridBagConstraints();
 		gbc_lblGender.anchor = GridBagConstraints.EAST;
 		gbc_lblGender.insets = new Insets(0, 0, 5, 5);
@@ -182,6 +200,8 @@ public class Reservation extends JFrame {
 		tfgender.setColumns(10);
 		
 		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setForeground(Color.WHITE);
+		lblAddress.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblAddress = new GridBagConstraints();
 		gbc_lblAddress.anchor = GridBagConstraints.EAST;
 		gbc_lblAddress.insets = new Insets(0, 0, 5, 5);
@@ -199,6 +219,8 @@ public class Reservation extends JFrame {
 		tfaddr.setColumns(10);
 		
 		JLabel lblPhoneNumber = new JLabel("Phone Number:");
+		lblPhoneNumber.setForeground(Color.WHITE);
+		lblPhoneNumber.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblPhoneNumber = new GridBagConstraints();
 		gbc_lblPhoneNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblPhoneNumber.insets = new Insets(0, 0, 5, 5);
@@ -216,6 +238,8 @@ public class Reservation extends JFrame {
 		tfphno.setColumns(10);
 		
 		JLabel lblClass = new JLabel("Class:");
+		lblClass.setForeground(Color.WHITE);
+		lblClass.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblClass = new GridBagConstraints();
 		gbc_lblClass.anchor = GridBagConstraints.EAST;
 		gbc_lblClass.insets = new Insets(0, 0, 5, 5);
@@ -224,6 +248,9 @@ public class Reservation extends JFrame {
 		contentPane.add(lblClass, gbc_lblClass);
 		
 		JComboBox cbclass = new JComboBox();
+		cbclass.setBackground(new Color(0, 0, 102));
+		cbclass.setForeground(Color.WHITE);
+		cbclass.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		cbclass.setModel(new DefaultComboBoxModel(new String[] {"First Class", "Business Class", "Economy Class"}));
 		GridBagConstraints gbc_cbclass = new GridBagConstraints();
 		gbc_cbclass.insets = new Insets(0, 0, 5, 5);
@@ -240,6 +267,9 @@ public class Reservation extends JFrame {
 		contentPane.add(label, gbc_label);
 		
 		JButton btnBookTickets = new JButton("Book Tickets");
+		btnBookTickets.setBackground(new Color(0, 0, 102));
+		btnBookTickets.setForeground(Color.WHITE);
+		btnBookTickets.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		
 		GridBagConstraints gbc_btnBookTickets = new GridBagConstraints();
 		gbc_btnBookTickets.insets = new Insets(0, 0, 5, 0);
@@ -249,6 +279,8 @@ public class Reservation extends JFrame {
 		contentPane.add(btnBookTickets, gbc_btnBookTickets);
 		
 		JLabel lblNewLabel = new JLabel("Booking Confirmed");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblNewLabel.setVisible(false);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 3;
@@ -269,7 +301,17 @@ public class Reservation extends JFrame {
 				String phone = tfphno.getText();
 				String gender = tfgender.getText().toString();
 				String address = tfaddr.getText().toString();
-				String status = "C";
+				String status = null;
+				Random r1 = new Random();
+				int s1 = r1.nextInt(10);
+				if(s1<=5)
+				{
+					status = "C";
+				}
+				if(s1 > 5)
+				{
+					status = "W";
+				}
 				Random r = new Random();
 				int pnr1 = r.nextInt(100000);
 				

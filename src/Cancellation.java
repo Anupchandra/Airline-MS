@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Cancellation extends JFrame {
 
@@ -59,6 +61,7 @@ public class Cancellation extends JFrame {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 359, 147);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -69,6 +72,8 @@ public class Cancellation extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblEnterTheTicket = new JLabel("Enter PNR Number:");
+		lblEnterTheTicket.setForeground(Color.WHITE);
+		lblEnterTheTicket.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblEnterTheTicket = new GridBagConstraints();
 		gbc_lblEnterTheTicket.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEnterTheTicket.anchor = GridBagConstraints.EAST;
@@ -93,6 +98,9 @@ public class Cancellation extends JFrame {
 		contentPane.add(label, gbc_label);
 		
 		JButton btnCancelTicket = new JButton("Cancel Ticket");
+		btnCancelTicket.setBackground(new Color(0, 0, 51));
+		btnCancelTicket.setForeground(Color.WHITE);
+		btnCancelTicket.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		
 		GridBagConstraints gbc_btnCancelTicket = new GridBagConstraints();
 		gbc_btnCancelTicket.insets = new Insets(0, 0, 5, 0);
@@ -102,6 +110,8 @@ public class Cancellation extends JFrame {
 		contentPane.add(btnCancelTicket, gbc_btnCancelTicket);
 		
 		JLabel lblNewLabel = new JLabel("Booking Cancelled.");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblNewLabel.setVisible(false);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 2;

@@ -21,6 +21,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Waitlisted extends JFrame {
 
@@ -66,6 +68,7 @@ public class Waitlisted extends JFrame {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 335, 227);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -76,6 +79,8 @@ public class Waitlisted extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblSelectFlight = new JLabel("Select Flight:");
+		lblSelectFlight.setForeground(Color.WHITE);
+		lblSelectFlight.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblSelectFlight = new GridBagConstraints();
 		gbc_lblSelectFlight.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSelectFlight.anchor = GridBagConstraints.EAST;
@@ -84,8 +89,12 @@ public class Waitlisted extends JFrame {
 		contentPane.add(lblSelectFlight, gbc_lblSelectFlight);
 		
 		JComboBox cbflno = new JComboBox();
+		cbflno.setBackground(new Color(0, 0, 51));
+		cbflno.setForeground(Color.WHITE);
+		cbflno.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		cbflno.setModel(new DefaultComboBoxModel(new String[] {"Bangalore to Delhi BADL84", "Bangalore to Mumbai BAMB86", "Chennai to Kolkata CHKL88", "Bangalore to Jaipur BAJP90", "Kochi to Mumbai KOMB92", "Bangalore to Kashmir BAKS94", "Bangalore to Dubai BADB96", "Bangalore to New York BANY98", "Bangalore to London BALN82"}));
 		GridBagConstraints gbc_cbflno = new GridBagConstraints();
+		gbc_cbflno.gridwidth = 2;
 		gbc_cbflno.insets = new Insets(0, 0, 5, 5);
 		gbc_cbflno.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbflno.gridx = 1;
@@ -100,6 +109,8 @@ public class Waitlisted extends JFrame {
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JLabel lblEnterTravelDate = new JLabel("Enter Travel Date:");
+		lblEnterTravelDate.setForeground(Color.WHITE);
+		lblEnterTravelDate.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblEnterTravelDate = new GridBagConstraints();
 		gbc_lblEnterTravelDate.anchor = GridBagConstraints.EAST;
 		gbc_lblEnterTravelDate.insets = new Insets(0, 0, 5, 5);
@@ -124,18 +135,25 @@ public class Waitlisted extends JFrame {
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		JButton btnCheckStatus = new JButton("Check Status");
+		btnCheckStatus.setBackground(new Color(0, 0, 51));
+		btnCheckStatus.setForeground(Color.WHITE);
+		btnCheckStatus.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		
 		GridBagConstraints gbc_btnCheckStatus = new GridBagConstraints();
 		gbc_btnCheckStatus.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCheckStatus.gridwidth = 2;
+		gbc_btnCheckStatus.gridwidth = 3;
 		gbc_btnCheckStatus.gridx = 0;
 		gbc_btnCheckStatus.gridy = 4;
 		contentPane.add(btnCheckStatus, gbc_btnCheckStatus);
 		
 		JLabel lblRetrievingDetails = new JLabel("Retrieving Details....");
+		lblRetrievingDetails.setForeground(Color.WHITE);
+		lblRetrievingDetails.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblRetrievingDetails.setVisible(false);
 		
 		JLabel lblNoDataReturned = new JLabel("No Data Returned.");
+		lblNoDataReturned.setForeground(Color.WHITE);
+		lblNoDataReturned.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblNoDataReturned.setVisible(false);
 		GridBagConstraints gbc_lblNoDataReturned = new GridBagConstraints();
 		gbc_lblNoDataReturned.gridwidth = 3;

@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Confirmed extends JFrame {
 
@@ -65,6 +67,7 @@ public class Confirmed extends JFrame {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 335, 218);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -75,6 +78,8 @@ public class Confirmed extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblSelectFlight = new JLabel("Select Flight:");
+		lblSelectFlight.setForeground(Color.WHITE);
+		lblSelectFlight.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblSelectFlight = new GridBagConstraints();
 		gbc_lblSelectFlight.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSelectFlight.anchor = GridBagConstraints.EAST;
@@ -83,8 +88,12 @@ public class Confirmed extends JFrame {
 		contentPane.add(lblSelectFlight, gbc_lblSelectFlight);
 		
 		JComboBox cbflno = new JComboBox();
+		cbflno.setBackground(new Color(0, 0, 51));
+		cbflno.setForeground(Color.WHITE);
+		cbflno.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		cbflno.setModel(new DefaultComboBoxModel(new String[] {"Bangalore to Delhi BADL84", "Bangalore to Mumbai BAMB86", "Chennai to Kolkata CHKL88", "Bangalore to Jaipur BAJP90", "Kochi to Mumbai KOMB92", "Bangalore to Kashmir BAKS94", "Bangalore to Dubai BADB96", "Bangalore to New York BANY98", "Bangalore to London BALN82"}));
 		GridBagConstraints gbc_cbflno = new GridBagConstraints();
+		gbc_cbflno.gridwidth = 2;
 		gbc_cbflno.insets = new Insets(0, 0, 5, 5);
 		gbc_cbflno.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbflno.gridx = 1;
@@ -99,6 +108,8 @@ public class Confirmed extends JFrame {
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JLabel lblEnterTravelDate = new JLabel("Enter Travel Date:");
+		lblEnterTravelDate.setForeground(Color.WHITE);
+		lblEnterTravelDate.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblEnterTravelDate = new GridBagConstraints();
 		gbc_lblEnterTravelDate.anchor = GridBagConstraints.EAST;
 		gbc_lblEnterTravelDate.insets = new Insets(0, 0, 5, 5);
@@ -107,7 +118,9 @@ public class Confirmed extends JFrame {
 		contentPane.add(lblEnterTravelDate, gbc_lblEnterTravelDate);
 		
 		JTextField tfdate = new JTextField();
+		tfdate.setBackground(Color.WHITE);
 		GridBagConstraints gbc_tfdate = new GridBagConstraints();
+		gbc_tfdate.gridwidth = 2;
 		gbc_tfdate.insets = new Insets(0, 0, 5, 5);
 		gbc_tfdate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfdate.gridx = 1;
@@ -123,15 +136,20 @@ public class Confirmed extends JFrame {
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		JButton btnCheckStatus = new JButton("Check Status");
+		btnCheckStatus.setBackground(new Color(0, 0, 51));
+		btnCheckStatus.setForeground(Color.WHITE);
+		btnCheckStatus.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		
 		GridBagConstraints gbc_btnCheckStatus = new GridBagConstraints();
 		gbc_btnCheckStatus.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCheckStatus.gridwidth = 2;
+		gbc_btnCheckStatus.gridwidth = 3;
 		gbc_btnCheckStatus.gridx = 0;
 		gbc_btnCheckStatus.gridy = 4;
 		contentPane.add(btnCheckStatus, gbc_btnCheckStatus);
 		
 		JLabel lbldata = new JLabel("No Data Returned");
+		lbldata.setForeground(Color.WHITE);
+		lbldata.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lbldata.setVisible(false);
 		GridBagConstraints gbc_lbldata = new GridBagConstraints();
 		gbc_lbldata.gridwidth = 3;
@@ -141,6 +159,8 @@ public class Confirmed extends JFrame {
 		contentPane.add(lbldata, gbc_lbldata);
 		
 		JLabel lblRetrievingDetails = new JLabel("Retrieving Details....");
+		lblRetrievingDetails.setForeground(Color.WHITE);
+		lblRetrievingDetails.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblRetrievingDetails.setVisible(false);
 		GridBagConstraints gbc_lblRetrievingDetails = new GridBagConstraints();
 		gbc_lblRetrievingDetails.gridwidth = 3;
@@ -177,11 +197,13 @@ public class Confirmed extends JFrame {
 					if(rows==0)
 					{
 						lbldata.setVisible(true);
+						lblRetrievingDetails.setVisible(false);
 					}
 					else
 					{
 					Object data1[][] = new Object[rows][11];
 					lblRetrievingDetails.setVisible(true);
+					lbldata.setVisible(false);
 					Object[] Colheads={"PNR","FLIGHT NO","TRAVEL DATE","FIRST NAME","LAST NAME","AGE","GENDER","ADDRESS","PHONE NUMBER","CLASS","STATUS"};
 					String query1 = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE =? AND STATUS = 'C'";
 					PreparedStatement ps1 = con.prepareStatement(query1);
