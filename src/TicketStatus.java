@@ -188,7 +188,9 @@ public class TicketStatus extends JFrame {
 						Display disp = new Display();
 						disp.getContentPane().add(jsp);
 						disp.setVisible(true);
+						ps2.close();
 					}
+					ps.close();
 					
 				}
 				catch(Exception e)

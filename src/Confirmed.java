@@ -178,8 +178,8 @@ public class Confirmed extends JFrame {
 				try
 				{
 					Connection con = connect();
-					Class.forName("oracle.jdbc.driver.OracleDriver");
-					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
+					//Class.forName("oracle.jdbc.driver.OracleDriver");
+				//	con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
 					String query = "SELECT * FROM RESERVATIONS WHERE FLIGHTNO =? AND TDATE=? AND STATUS='C'";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setString(1,flight);
