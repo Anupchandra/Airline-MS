@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -154,14 +155,53 @@ public class Reschedule extends JFrame {
 		lblTicketRescheduled.setForeground(Color.WHITE);
 		lblTicketRescheduled.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblTicketRescheduled = new GridBagConstraints();
-		gbc_lblTicketRescheduled.gridwidth = 2;
+		gbc_lblTicketRescheduled.insets = new Insets(0, 0, 0, 5);
 		gbc_lblTicketRescheduled.gridx = 0;
 		gbc_lblTicketRescheduled.gridy = 6;
 		contentPane.add(lblTicketRescheduled, gbc_lblTicketRescheduled);
 		
+		JLabel lblPleaseEnterThe = new JLabel("Please enter the correct Date Format!");
+		lblPleaseEnterThe.setVisible(false);
+		lblPleaseEnterThe.setForeground(Color.WHITE);
+		lblPleaseEnterThe.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		GridBagConstraints gbc_lblPleaseEnterThe = new GridBagConstraints();
+		gbc_lblPleaseEnterThe.gridx = 1;
+		gbc_lblPleaseEnterThe.gridy = 6;
+		contentPane.add(lblPleaseEnterThe, gbc_lblPleaseEnterThe);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String pnr = tfpnr.getText().toString();
+				String date = tfnewdate.getText().toString();
+				if(pnr.equals(""))
+				{
+					lblNewLabel.setVisible(true);
+				}
+				String datePattern = "\\d{2}-\\d{2}-\\d{4}";
+				Boolean isDate2 = date.matches(datePattern);
+				if(isDate2)
+				{
+				try
+				{
+					Connection con = connect();
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
+					String query = "UPDATE RESERVATIONS SET TDATE = ? WHERE PNR = ?";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1,date);
+					ps.setString(2,pnr);
+					ps.execute();
+					ps.close();
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				}
+				else
+				{
+					lblPleaseEnterThe.setVisible(true);
+				}
 			}
 		});
 	}

@@ -114,15 +114,30 @@ public class Cancellation extends JFrame {
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblNewLabel.setVisible(false);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 2;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 3;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
+		JLabel lblInvalidPnr = new JLabel("Invalid PNR!");
+		lblInvalidPnr.setVisible(false);
+		lblInvalidPnr.setForeground(Color.WHITE);
+		lblInvalidPnr.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		GridBagConstraints gbc_lblInvalidPnr = new GridBagConstraints();
+		gbc_lblInvalidPnr.gridx = 1;
+		gbc_lblInvalidPnr.gridy = 3;
+		contentPane.add(lblInvalidPnr, gbc_lblInvalidPnr);
+		
 		btnCancelTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel.setVisible(true);
-				int pnr = Integer.parseInt(tfpnr.getText());
+				
+				String pnr = tfpnr.getText().toString();
+				if(pnr.equals(""))
+				{
+					lblInvalidPnr.setVisible(true);
+				}
+				else
+				{
 				String query = "DELETE FROM RESERVATIONS WHERE PNR=?";
 				try
 				{
@@ -130,13 +145,15 @@ public class Cancellation extends JFrame {
 					Class.forName("oracle.jdbc.driver.OracleDriver");
 					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","anupchandra");
 					PreparedStatement ps1 = con.prepareStatement(query);
-					ps1.setInt(1,pnr);
+					ps1.setString(1,pnr);
 					ps1.executeUpdate();
+					lblNewLabel.setVisible(true);
 					ps1.close();
 				}
 				catch(Exception e1)
 				{
 					e1.printStackTrace();
+				}
 				}
 			}
 		});
